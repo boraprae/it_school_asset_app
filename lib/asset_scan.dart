@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-
-class AssetScan extends StatefulWidget {
+class AssetScan extends StatelessWidget {
   const AssetScan({Key? key}) : super(key: key);
 
-  @override
-  State<AssetScan> createState() => _AssetScanState();
-}
-
-class _AssetScanState extends State<AssetScan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,8 +52,4 @@ class _AssetScanState extends State<AssetScan> {
       ),
     );
   }
-}
-
-void qrScanner(){
-
 }
