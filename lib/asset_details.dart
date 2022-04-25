@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_asset/components/qr_views.dart';
 
 class Asset_Details extends StatefulWidget {
   final String text;
@@ -48,10 +49,14 @@ class _Asset_DetailsState extends State<Asset_Details> {
   }
 
   Widget build(BuildContext context) {
-    print("this is result: "+ widget.text);
+    print("this is result: " + widget.text);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Asset Details"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Get.to(QR_Views()),
+        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -59,7 +64,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
           child: Column(
             children: [
               const Text("Inventory number"),
-              Text(numberInventory),
+              Text(widget.text),
               Text(nameInventory),
               const SizedBox(height: 30.0),
               TextField(
@@ -115,7 +120,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
               ElevatedButton(
                 onPressed: () {
                   _showMyDialog();
-                  Get.to(mianPage());
+                  //Get.to(());
                 },
                 child: const Text('Check'),
               ),
