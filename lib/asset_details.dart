@@ -20,6 +20,36 @@ class _Asset_DetailsState extends State<Asset_Details> {
   String numberInventory = "644562646";
   String nameInventory = "mate";
 
+  void getData() async {
+    String url = 'http://10.0.2.2:3002/scan';
+    Response response =
+        await GetConnect().get(url, query: {"inventory_number": widget.text});
+
+    print(response.body);
+    if (!response.isOk) {
+      return Get.defaultDialog(title: 'Error', middleText: response.body);
+    }
+
+    List res = response.body;
+    if (res.length == 0) {
+      return Get.defaultDialog(title: 'Error', middleText: 'No data');
+    }
+
+    print(res);
+
+    setState(() {
+      numberInventory = res[0]['Inventory_Number'];
+      nameInventory = res[0]['Asset_Description'];
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
   @override
   Future<void> _showMyDialog() async {
     return showDialog<void>(
