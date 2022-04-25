@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AssetScan extends StatelessWidget {
   const AssetScan({Key? key}) : super(key: key);
@@ -30,7 +31,9 @@ class AssetScan extends StatelessWidget {
                     height: 50,
                   ),
                   MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/qrViews');
+                    },
                     color: Colors.blue,
                     textColor: Colors.white,
                     child: Icon(

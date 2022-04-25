@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:project_asset/asset_scan.dart';
-import 'package:project_asset/qr_sample.dart';
+import 'package:get/get.dart';
+import 'package:project_asset/components/asset_scan.dart';
+import 'package:project_asset/components/qr_views.dart';
 
 void main() {
   runApp(
-      MaterialApp(
+      GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/test',
+      initialRoute: '/assetScan',
       routes: {
         '/assetScan': (context) => AssetScan(),
-        '/test' : (context) => MyHome(),
+        '/qrViews': (context) => QR_Views(),
       },
     ),
   );
