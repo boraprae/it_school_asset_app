@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_asset/assets/asset_scan.dart';
+import 'package:project_asset/asset_scan.dart';
 
 void main() {
   runApp(
