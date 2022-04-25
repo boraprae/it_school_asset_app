@@ -9,6 +9,9 @@ class Asset_Details extends StatefulWidget {
 
 class _Asset_DetailsState extends State<Asset_Details> {
 
+  final TextEditingController tcBuild= TextEditingController();
+  final TextEditingController tcRoom= TextEditingController();
+
 
   bool _value = false;
   int val1 = 0;
@@ -31,14 +34,16 @@ class _Asset_DetailsState extends State<Asset_Details> {
             Text(numberInventory),
             Text(nameInventory),
             const SizedBox(height: 30.0),
-            const TextField(
+             TextField(
+              controller: tcBuild,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Building',
               ),
             ),
             const SizedBox(height: 30.0),
-            const TextField(
+             TextField(
+              controller: tcRoom,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Room',
@@ -57,7 +62,6 @@ class _Asset_DetailsState extends State<Asset_Details> {
                   },
                 ),
                 Text("Lost"),
-
                 Radio(
                   value: 2,
                   groupValue: val1,
@@ -68,7 +72,6 @@ class _Asset_DetailsState extends State<Asset_Details> {
                   },
                 ),
                 Text("Normal"),
-                
                 Radio(
                   value: 3,
                   groupValue: val1,
@@ -79,11 +82,10 @@ class _Asset_DetailsState extends State<Asset_Details> {
                   },
                 ),
                 Text("Degraded"),
-
               ],
             ),
             ElevatedButton(
-              onPressed: (){},
+              onPressed: () {},
               child: const Text('Check'),
             ),
           ],
