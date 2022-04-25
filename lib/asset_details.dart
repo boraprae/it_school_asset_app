@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Asset_Details extends StatefulWidget {
-  const Asset_Details({Key? key}) : super(key: key);
+  final String text;
+  Asset_Details({Key? key, required this.text}) : super(key: key);
 
   @override
   State<Asset_Details> createState() => _Asset_DetailsState();
 }
 
 class _Asset_DetailsState extends State<Asset_Details> {
-
-
   bool _value = false;
   int val1 = 0;
 
@@ -18,6 +17,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
 
   @override
   Widget build(BuildContext context) {
+    print("this is result: "+ widget.text);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Asset_Details Details"),
@@ -57,7 +57,6 @@ class _Asset_DetailsState extends State<Asset_Details> {
                   },
                 ),
                 Text("Lost"),
-
                 Radio(
                   value: 2,
                   groupValue: val1,
@@ -68,7 +67,6 @@ class _Asset_DetailsState extends State<Asset_Details> {
                   },
                 ),
                 Text("Normal"),
-                
                 Radio(
                   value: 3,
                   groupValue: val1,
@@ -79,11 +77,10 @@ class _Asset_DetailsState extends State<Asset_Details> {
                   },
                 ),
                 Text("Degraded"),
-
               ],
             ),
             ElevatedButton(
-              onPressed: (){},
+              onPressed: () {},
               child: const Text('Check'),
             ),
           ],

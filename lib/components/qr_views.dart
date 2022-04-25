@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_asset/asset_details.dart';
 import 'package:project_asset/components/asset_scan.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -83,14 +84,13 @@ class _QR_ViewsState extends State<QR_Views> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SecondScreen(
-                text: result!.code,
-              ),
-            ));
-        // Get.to(() => '/assetScan');
+
+        if (result != null) {
+          Get.back();
+          Get.to(() => Asset_Details(text: result!.code.toString()));
+          print(result!.code);
+        }
+
         //print(result!.code);
       });
     });
