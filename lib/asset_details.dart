@@ -15,13 +15,14 @@ class _Asset_DetailsState extends State<Asset_Details> {
   final TextEditingController tcRoom = TextEditingController();
 
   bool _value = false;
-  int val1 = 0;
+  bool _isButtonEnabled = true;
+  int? val1 = 0;
 
   String numberInventory = "644562646";
   String nameInventory = "mate";
 
   void getData() async {
-    String url = 'http://10.0.2.2:3002/scan';
+    String url = 'http://159.223.83.224:3002/scan';
     Response response =
         await GetConnect().get(url, query: {"inventory_number": widget.text});
 
@@ -40,13 +41,25 @@ class _Asset_DetailsState extends State<Asset_Details> {
     setState(() {
       numberInventory = res[0]['Inventory_Number'];
       nameInventory = res[0]['Asset_Description'];
+      tcBuild.text = res[0]['Location'];
+      tcRoom.text = res[0]['Room'];
+      val1 = res[0]['Status'];
+      if (res[0]['Date_scan'] != null) {
+        _isButtonEnabled = false;
+      }
+      print(res[0]['Date_scan']);
     });
   }
+
+  // void _disButton() {
+  //   if()
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    //! _isButtonEnabled = true;
     getData();
   }
 
@@ -68,7 +81,9 @@ class _Asset_DetailsState extends State<Asset_Details> {
               actions: <Widget>[
                 TextButton(
                   child: const Text('Close'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(QR_Views());
+                  },
                 ),
               ],
             ),
@@ -99,6 +114,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
               const SizedBox(height: 30.0),
               TextField(
                 controller: tcBuild,
+                enabled: _isButtonEnabled,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Building',
@@ -107,6 +123,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
               const SizedBox(height: 30.0),
               TextField(
                 controller: tcRoom,
+                enabled: _isButtonEnabled,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Room',
@@ -116,44 +133,71 @@ class _Asset_DetailsState extends State<Asset_Details> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Radio(
+                    value: 0,
+                    groupValue: val1,
+                    onChanged: !_isButtonEnabled
+                        ? null
+                        : (value) {
+                            setState(() {
+                              val1 = 0;
+                            });
+                          },
+                  ),
+                  const Text("Lost"),
+                  Radio(
                     value: 1,
                     groupValue: val1,
-                    onChanged: (value) {
-                      setState(() {
-                        val1 = 1;
-                      });
-                    },
+                    onChanged: !_isButtonEnabled
+                        ? null
+                        : (value) {
+                            setState(() {
+                              val1 = 1;
+                            });
+                          },
                   ),
-                  Text("Lost"),
+                  const Text("Normal"),
                   Radio(
                     value: 2,
                     groupValue: val1,
-                    onChanged: (value) {
-                      setState(() {
-                        val1 = 2;
-                      });
-                    },
+                    onChanged: !_isButtonEnabled
+                        ? null
+                        : (value) {
+                            setState(() {
+                              val1 = 2;
+                            });
+                          },
                   ),
-                  Text("Normal"),
-                  Radio(
-                    value: 3,
-                    groupValue: val1,
-                    onChanged: (value) {
-                      setState(() {
-                        val1 = 3;
-                      });
-                    },
-                  ),
-                  Text("Degraded"),
+                  const Text("Degraded"),
                 ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  _showMyDialog();
-                  //Get.to(());
-                },
-                child: const Text('Check'),
-              ),
+              !_isButtonEnabled
+                  ? Text('This asset is Checked')
+                  : ElevatedButton(
+                      onPressed: () async {
+                        var building = tcBuild.text;
+                        var room = tcRoom.text;
+                        var valstatus = val1;
+                        var inventory_number = numberInventory;
+
+                        print(building);
+                        print(room);
+
+                        Response data = await GetConnect()
+                            .post('http://159.223.83.224:3002/check', {
+                          'inventory_number': inventory_number,
+                          'location': building,
+                          'room': room,
+                          'status': valstatus
+                        });
+
+                        if (!data.isOk) {
+                          return Get.defaultDialog(
+                              title: 'Error', middleText: data.body);
+                        }
+                        _showMyDialog();
+                      },
+                      child: const Text('Check'),
+                    ),
             ],
           ),
         ),
