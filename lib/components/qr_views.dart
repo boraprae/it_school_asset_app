@@ -20,15 +20,6 @@ class _QR_ViewsState extends State<QR_Views> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
-  // @override
-  // void reassemble() {
-  //   super.reassemble();
-  //   if (Platform.isAndroid) {
-  //     controller!.pauseCamera();
-  //   }
-  //   controller!.resumeCamera();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,22 +33,6 @@ class _QR_ViewsState extends State<QR_Views> {
       body: Column(
         children: <Widget>[
           Expanded(flex: 4, child: _buildQrView(context)),
-          // Expanded(
-          //   flex: 1,
-          //   child: FittedBox(
-          //     fit: BoxFit.contain,
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //       children: <Widget>[
-          //         if (result != null)
-          //           Text(
-          //               'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-          //         else
-          //           const Text('Scan a code'),
-          //       ],
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );
