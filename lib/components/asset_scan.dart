@@ -319,7 +319,7 @@ Widget assetBadge(queryData, assetName1, assetNum1, icon1, bgColor1, textColor1,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
-                assetName1,
+                assetName2,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
