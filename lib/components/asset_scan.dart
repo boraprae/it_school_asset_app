@@ -23,11 +23,11 @@ class AssetScan extends StatelessWidget {
                       child: Image.asset('assets/images/it_logo.png'),
                     ),
                   ),
-                  Text(
+                  const Text(
                     "IT School Asset",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   MaterialButton(
@@ -36,14 +36,14 @@ class AssetScan extends StatelessWidget {
                     },
                     color: Colors.blue,
                     textColor: Colors.white,
-                    child: Icon(
+                    child: const Icon(
                       Icons.qr_code,
                       size: 36,
                     ),
-                    padding: EdgeInsets.all(16),
-                    shape: CircleBorder(),
+                    padding: const EdgeInsets.all(16),
+                    shape: const CircleBorder(),
                   ),
-                  Text(
+                  const Text(
                     'Scan here',
                     style: TextStyle(fontSize: 12),
                   ),
