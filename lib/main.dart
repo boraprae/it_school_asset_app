@@ -5,7 +5,7 @@ import 'package:project_asset/components/qr_views.dart';
 
 void main() {
   runApp(
-      GetMaterialApp(
+    GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/assetScan',
       routes: {
