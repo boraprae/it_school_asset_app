@@ -22,22 +22,27 @@ class _Asset_DetailsState extends State<Asset_Details> {
   String nameInventory = "mate";
 
   void getData() async {
+    print("Passed inv:" + widget.text);
     String url = 'http://159.223.83.224:3002/scan';
-    Response response =
-        await GetConnect().get(url, query: {"inventory_number": widget.text});
+    Response response = await GetConnect()
+        .get(url, query: {"Inventory_Number": widget.text.trim()});
 
-    print(response.body);
+    // ignore: avoid_print
+    // print("+++++++++");
+    // print(response);
     if (!response.isOk) {
       return Get.defaultDialog(title: 'Error', middleText: response.body);
     }
 
     List res = response.body;
+    // print('================');
+    // print(res);
     if (res.length == 0) {
-      return Get.defaultDialog(title: 'Error', middleText: 'No data');
+      return Get.defaultDialog(
+          title: 'Error', middleText: 'Asset not found in our system');
     }
 
-    print(res);
-
+    if (!mounted) return;
     setState(() {
       numberInventory = res[0]['Inventory_Number'];
       nameInventory = res[0]['Asset_Description'];
@@ -47,7 +52,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
       if (res[0]['Date_scan'] != null) {
         _isButtonEnabled = false;
       }
-      print(res[0]['Date_scan']);
+      // print(res[0]['Date_scan']);
     });
   }
 
@@ -70,6 +75,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AlertDialog(
               title: const Text('Success'),
@@ -94,6 +100,8 @@ class _Asset_DetailsState extends State<Asset_Details> {
   }
 
   Widget build(BuildContext context) {
+    MediaQueryData queryData = MediaQuery.of(context);
+    // ignore: avoid_print
     print("this is result: " + widget.text);
     return Scaffold(
       appBar: AppBar(
@@ -108,9 +116,47 @@ class _Asset_DetailsState extends State<Asset_Details> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              const Text("Inventory number"),
-              Text(widget.text),
-              Text(nameInventory),
+              Container(
+                width: queryData.size.width,
+                height: queryData.size.height / 5.5,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF2A9DF4),
+                        Color(0xFF7CC0F1),
+                      ]),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Inventory number",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text(
+                        widget.text,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        nameInventory,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ]),
+              ),
               const SizedBox(height: 30.0),
               TextField(
                 controller: tcBuild,
@@ -171,7 +217,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
                 ],
               ),
               !_isButtonEnabled
-                  ? Text('This asset is Checked')
+                  ? Text('Not in checking period or this asset is checked')
                   : ElevatedButton(
                       onPressed: () async {
                         var building = tcBuild.text;
