@@ -269,11 +269,13 @@ class AssetScan extends StatelessWidget {
                                     height: queryData.size.width * 0.12,
                                     width: queryData.size.width * 0.5,
                                     child: TextField(
+                                      maxLength: 15,
                                       controller: tcAssetNumber,
                                       style:
                                           const TextStyle(color: Colors.black),
                                       decoration: InputDecoration(
                                         hintText: 'Inventory Number',
+                                        counterText: '',
                                         hintStyle: const TextStyle(
                                             fontSize: 12.0,
                                             color: Colors.black),
