@@ -9,6 +9,14 @@ class AssetScan extends StatelessWidget {
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
     TextEditingController tcAssetNumber = TextEditingController();
+
+    String startDate = '18/10/2565';
+    String endDate = '19/10/2565';
+    String totalAllAsset = '1670';
+    String totalNormalAsset = '1670';
+    String totalBorkeAsset = '599';
+    String totalLostAsset = '6';
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -89,8 +97,8 @@ class AssetScan extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               ),
-                              const Text(
-                                ' 18/10/2022',
+                              Text(
+                                ' ' + startDate,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -107,8 +115,8 @@ class AssetScan extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               ),
-                              const Text(
-                                ' 19/10/2022',
+                              Text(
+                                ' ' + endDate,
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -188,12 +196,12 @@ class AssetScan extends StatelessWidget {
                   assetBadge(
                       queryData,
                       'ครุภัณฑ์ทั้งหมด',
-                      '1670',
+                      totalAllAsset,
                       Icons.assessment_outlined,
                       0xFFD0EFFF,
                       0xFF2A9DF4,
                       'ครุภัณฑ์ปกติ',
-                      '1000',
+                      totalNormalAsset,
                       Icons.checklist_rtl_outlined,
                       0xFFA6FFD1,
                       0xFF23BC8E),
@@ -203,12 +211,12 @@ class AssetScan extends StatelessWidget {
                   assetBadge(
                       queryData,
                       'ครุภัณฑ์เสื่อมสภาพ',
-                      '600',
+                      totalBorkeAsset,
                       Icons.warning_amber_outlined,
                       0xFFFEEFB0,
                       0xFFF2C112,
                       'ครุภัณฑ์สูญหาย',
-                      '5',
+                      totalLostAsset,
                       Icons.dangerous_outlined,
                       0xFFFFAF94,
                       0xFFDA3131),
@@ -253,7 +261,9 @@ class AssetScan extends StatelessWidget {
                                       fontSize: 12,
                                     ),
                                   ),
-                                  SizedBox(height: 10,),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
                                   SizedBox(
                                     height: queryData.size.width * 0.12,
                                     width: queryData.size.width * 0.5,
