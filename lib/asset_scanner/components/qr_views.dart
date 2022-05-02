@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_asset/asset_details.dart';
-import 'package:project_asset/components/asset_scan.dart';
+import 'package:project_asset/asset_scanner/asset_scan.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QR_Views extends StatefulWidget {

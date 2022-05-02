@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_asset/components/qr_views.dart';
+import 'package:project_asset/asset_scanner/components/qr_views.dart';
 
 class Asset_Details extends StatefulWidget {
   final String text;
