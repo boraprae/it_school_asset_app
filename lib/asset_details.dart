@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_asset/asset_scanner/asset_scan.dart';
 import 'package:project_asset/asset_scanner/components/qr_views.dart';
 
 class Asset_Details extends StatefulWidget {
@@ -108,7 +109,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
         title: const Text("Asset Details"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Get.to(QR_Views()),
+          onPressed: () => Get.to(AssetScan()),
         ),
       ),
       body: SafeArea(
