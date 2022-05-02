@@ -3,20 +3,53 @@ import 'package:get/get.dart';
 import 'package:project_asset/asset_details.dart';
 import 'package:project_asset/asset_scanner/components/asset_status.dart';
 
-class AssetScan extends StatelessWidget {
-  const AssetScan({Key? key}) : super(key: key);
+class AssetScan extends StatefulWidget {
+  AssetScan({Key? key}) : super(key: key);
+
+  @override
+  State<AssetScan> createState() => _AssetScanState();
+}
+
+class _AssetScanState extends State<AssetScan> {
+  TextEditingController tcAssetNumber = TextEditingController();
+  final String _url = 'http://10.0.2.2:3002/summary';
+  Map? _data;
+
+  String startDate = '18/10/2565';
+  String endDate = '19/10/2565';
+  String totalAllAsset = '1670';
+  String totalNormalAsset = '1670';
+  String totalBorkeAsset = '599';
+  String totalLostAsset = '6';
+
+  void getData() async {
+    Response response = await GetConnect().get(_url);
+    // print(response.body);
+    if (response.status.isOk) {
+      _data = response.body;
+      print(_data!);
+      setState(() {
+        startDate = _data!['date_start'];
+        endDate = _data!['date_end'];
+        totalAllAsset = _data!['total'].toString();
+        totalNormalAsset = _data!['normal'].toString();
+        totalBorkeAsset = _data!['degraded'].toString();
+        totalLostAsset = _data!['lost'].toString();
+      });
+    } else {
+      throw Exception('Error');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
-    TextEditingController tcAssetNumber = TextEditingController();
-
-    String startDate = '18/10/2565';
-    String endDate = '19/10/2565';
-    String totalAllAsset = '1670';
-    String totalNormalAsset = '1670';
-    String totalBorkeAsset = '599';
-    String totalLostAsset = '6';
 
     return Scaffold(
       body: SafeArea(
@@ -159,7 +192,7 @@ class AssetScan extends StatelessWidget {
                               top: queryData.size.height * 0.01,
                               left: queryData.size.width * 0.05,
                               child: const Text(
-                                '78%',
+                                '100%',
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -170,7 +203,7 @@ class AssetScan extends StatelessWidget {
                               top: queryData.size.height * 0.01,
                               left: queryData.size.width * 0.15,
                               child: Container(
-                                width: queryData.size.width / 1.8,
+                                width: queryData.size.width / 1.4,
                                 height: queryData.size.height / 55,
                                 decoration: BoxDecoration(
                                   gradient: const LinearGradient(
