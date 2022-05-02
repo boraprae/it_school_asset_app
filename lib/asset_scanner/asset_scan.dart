@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_asset/asset_details.dart';
 import 'package:project_asset/asset_scanner/components/asset_status.dart';
 
 class AssetScan extends StatelessWidget {
@@ -303,7 +304,14 @@ class AssetScan extends StatelessWidget {
                                 child: const Text('Cancel'),
                               ),
                               TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
+                                onPressed: () {
+                                  if (tcAssetNumber.text != null) {
+                                    Get.back();
+                                    Get.to(() => Asset_Details(
+                                        text: tcAssetNumber.text));
+                                    print(tcAssetNumber.text);
+                                  }
+                                },
                                 child: const Text('OK'),
                               ),
                             ],
