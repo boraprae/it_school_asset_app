@@ -8,6 +8,7 @@ class AssetScan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
+    TextEditingController tcAssetNumber = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -34,10 +35,10 @@ class AssetScan extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.logout),
+                          icon: const Icon(Icons.logout),
                         ),
                       ],
                     ),
@@ -47,11 +48,11 @@ class AssetScan extends StatelessWidget {
                     width: queryData.size.width,
                     height: queryData.size.height / 5.5,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            Color(0xFF2A9DF4),
+                            const Color(0xFF2A9DF4),
                             Color(0xFF7CC0F1),
                           ]),
                       borderRadius: BorderRadius.circular(15),
@@ -61,7 +62,7 @@ class AssetScan extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'การตรวจนับครุภัณฑ์ประจำปี 2565',
                             style: TextStyle(
                               fontSize: 18,
@@ -69,18 +70,18 @@ class AssetScan extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'ครั้งที่ 1 ',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Row(
                             children: [
-                              Text(
+                              const Text(
                                 'วันเริ่มต้น',
                                 style: TextStyle(
                                   fontSize: 12,
@@ -88,7 +89,7 @@ class AssetScan extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 ' 18/10/2022',
                                 style: TextStyle(
                                   fontSize: 12,
@@ -98,17 +99,17 @@ class AssetScan extends StatelessWidget {
                               const SizedBox(
                                 width: 50,
                               ),
-                              Text(
+                              const Text(
                                 'วันสิ้นสุด',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 ' 19/10/2022',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   color: Colors.white,
                                 ),
@@ -125,7 +126,7 @@ class AssetScan extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'ความคืบหน้าการตรวจนับ',
                           style: TextStyle(
                             fontSize: 14,
@@ -142,15 +143,15 @@ class AssetScan extends StatelessWidget {
                               height: queryData.size.height / 25,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color: Color(0xFFF0F0F0),
+                                color: const Color(0xFFF0F0F0),
                               ),
                             ),
                             Positioned(
                               top: queryData.size.height * 0.01,
                               left: queryData.size.width * 0.05,
-                              child: Text(
+                              child: const Text(
                                 '78%',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -163,14 +164,14 @@ class AssetScan extends StatelessWidget {
                                 width: queryData.size.width / 1.8,
                                 height: queryData.size.height / 55,
                                 decoration: BoxDecoration(
-                                  gradient: LinearGradient(
+                                  gradient: const LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                       colors: [
                                         Color(0xFFFA64B6),
-                                        Color(0xFFCFBDF5),
+                                        const Color(0xFFCFBDF5),
                                         Color(0xFF7CC0F1),
-                                        Color(0xFF01E4A7),
+                                        const Color(0xFF01E4A7),
                                       ]),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
@@ -212,14 +213,131 @@ class AssetScan extends StatelessWidget {
                       0xFFFFAF94,
                       0xFFDA3131),
 
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Center(
+                    child: Text(
+                      'เลือกวิธีการตรวจนับ',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+
+                  Center(
+                    child: const Text(
+                      'ป้อนรหัสวัสดุ 15 หลัก',
+                      style: const TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Center(
+                    child: MaterialButton(
+                      onPressed: () {
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            content: Container(
+                              height: 100,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'ป้อนรหัสวัสดุ 15 หลัก',
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  SizedBox(
+                                    height: queryData.size.width * 0.12,
+                                    width: queryData.size.width * 0.5,
+                                    child: TextField(
+                                      controller: tcAssetNumber,
+                                      style:
+                                          const TextStyle(color: Colors.black),
+                                      decoration: InputDecoration(
+                                        hintText: 'Inventory Number',
+                                        hintStyle: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          borderSide: const BorderSide(
+                                              color: const Color(0xFF7CC0F1),
+                                              width: 1.5),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          borderSide: const BorderSide(
+                                              color: const Color(0xFF7CC0F1),
+                                              width: 1.5),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+
+                      color: const Color(0xFF7CC0F1),
+                      textColor: Colors.white,
+                      child: const Text(
+                        'ป้อนรหัส',
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                      // padding: const EdgeInsets.all(16),
+                      // shape: const CircleBorder(),
+                    ),
+                  ),
                   Spacer(),
+                  const Center(
+                    child: Text(
+                      'หรือ',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const Center(
+                    child: Text(
+                      'สแกน QR Code ของวัสดุ',
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
                   //**ปุ่มสแกน**/
                   Center(
                     child: MaterialButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/qrViews');
                       },
-                      color: Color(0xFF7CC0F1),
+                      color: const Color(0xFF7CC0F1),
                       textColor: Colors.white,
                       child: const Icon(
                         Icons.qr_code,
@@ -227,18 +345,6 @@ class AssetScan extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.all(16),
                       shape: const CircleBorder(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: Text(
-                      'สแกนเพื่อตรวจนับวัสดุ',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
                     ),
                   ),
                 ],
