@@ -18,6 +18,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
   bool _value = false;
   bool _isButtonEnabled = true;
   int? val1 = 0;
+  bool? checking;
 
   String numberInventory = "644562646";
   String nameInventory = "mate";
@@ -25,6 +26,7 @@ class _Asset_DetailsState extends State<Asset_Details> {
   void getData() async {
     print("Passed inv:" + widget.text);
     String url = 'http://159.223.83.224:3002/scan';
+    String urlsummary = 'http://159.223.83.224:3002/summary';
     Response response = await GetConnect()
         .get(url, query: {"Inventory_Number": widget.text.trim()});
 
@@ -34,6 +36,13 @@ class _Asset_DetailsState extends State<Asset_Details> {
     if (!response.isOk) {
       return Get.defaultDialog(title: 'Error', middleText: response.body);
     }
+
+    Response responsesummary = await GetConnect().get(urlsummary);
+
+    print('================');
+    print(responsesummary.body);
+
+
 
     List res = response.body;
     // print('================');
@@ -50,7 +59,12 @@ class _Asset_DetailsState extends State<Asset_Details> {
       tcBuild.text = res[0]['Location'];
       tcRoom.text = res[0]['Room'];
       val1 = res[0]['Status'];
-      if (res[0]['Date_scan'] != null) {
+      checking = responsesummary.body['isInCheckingPeriod'];
+
+      print("******************");
+      print(checking);
+      // checking =
+      if (res[0]['Date_scan'] != null || checking == false) {
         _isButtonEnabled = false;
       }
       // print(res[0]['Date_scan']);
